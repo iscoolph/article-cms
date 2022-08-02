@@ -1,0 +1,37 @@
+.table-main {
+  padding: 15px 0;
+  background-color: white;
+  table {
+    width: 100%;
+  }
+
+  .mat-row {
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+
+    }
+  }
+
+  .tbl-head{
+    padding: 10px 23px;
+    height: 47px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  td:not(:first-child) mat-checkbox{
+    display: none;
+  }
+
+  .bottom-ctrls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 15px;
+  }
+}
+
+.dt-width {
+  padding: 0 10px;
+}

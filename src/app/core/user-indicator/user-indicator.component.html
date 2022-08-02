@@ -1,0 +1,10 @@
+<div *ngIf="user" class="user" [matMenuTriggerFor]="menu">
+  {{ user.fullName }}
+  <mat-icon>
+    arrow_drop_down
+  </mat-icon>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button (click)="logout()" mat-menu-item>Logout</button>
+</mat-menu>

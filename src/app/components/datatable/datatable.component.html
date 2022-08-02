@@ -1,0 +1,76 @@
+<div class="table-main mat-elevation-z2">
+  <div class="tbl-head">
+    <div>
+      <ng-content></ng-content>
+    </div>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Search" #searchInpt />
+    </mat-form-field>
+  </div>
+  <table
+    mat-table
+    matSort
+    (matSortChange)="onSortChange($event)"
+    [dataSource]="dataSource"
+  >
+    <ng-container *ngIf="showCheckbox" matColumnDef="checkBoxCol">
+      <th
+        mat-header-cell
+        class="dt-width"
+        *matHeaderCellDef
+        mat-sort-header
+      ></th>
+      <td mat-cell class="dt-width" *matCellDef="let element">
+        <mat-checkbox [value]="element" #checkBoxs></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container
+      *ngFor="let tblDef of tblDefinition"
+      [matColumnDef]="tblDef.columnKey"
+    >
+      <th mat-header-cell class="dt-width" *matHeaderCellDef mat-sort-header>
+        <h3>{{ tblDef.columnTitle }}</h3>
+      </th>
+      <td mat-cell class="dt-width" *matCellDef="let element">
+        <ng-container *ngIf="!tblDef.hasCustomTemplate">
+          {{ deepColParse(element, tblDef.columnKey) }}
+        </ng-container>
+        <ng-container *ngIf="tblDef.hasCustomTemplate">
+          <ng-container
+            *ngTemplateOutlet="
+              dtCustomTemplate;
+              context: { $implicit: element }
+            "
+          ></ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selectRow(row)"
+    ></tr>
+  </table>
+
+  <mat-progress-bar
+    color="accent"
+    mode="indeterminate"
+    *ngIf="dataSource.isLoading$ | async"
+  ></mat-progress-bar>
+
+  <div class="bottom-ctrls">
+    <button (click)="toggleSelectors()" *ngIf="selectable" mat-raised-button>Toggle Selector</button>
+    <div></div>
+    <mat-paginator
+      [length]="dataSource.count$ | async"
+      [pageSize]="10"
+      [hidePageSize]="true"
+      showFirstLastButtons
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="form-main">
+  <h2>
+    {{ isEditing ? 'Update' : 'Create' }} Article
+  </h2>
+  <form (ngSubmit)="saveArticle(articleForm)" action="" #articleForm="ngForm">
+    <input type="hidden" name="id" ngModel>
+    <input type="hidden" name="userId" ngModel>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Title" name="title" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Body" name="body" ngModel required></textarea>
+    </mat-form-field>
+    <div style="margin-top:20px;">
+        <button [disabled]="!articleForm.valid" mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+</div>

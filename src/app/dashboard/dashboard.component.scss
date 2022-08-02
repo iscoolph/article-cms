@@ -1,0 +1,29 @@
+@import '~@angular/material/theming';
+
+.menus {
+  display: flex;
+  // justify-content: space-between;
+  flex-wrap: wrap;
+  .menu{
+    display: flex;
+    width: 27%;
+    margin: 10px 15px;
+    cursor: pointer;
+    background-color: white;
+    position: relative;
+    padding: 9px 15px;
+    &::after {
+      content: "";
+      width: 6px;
+      height: 100%;
+      background-color: #ff7043;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+mat-divider {
+  margin: 15px 0;
+}

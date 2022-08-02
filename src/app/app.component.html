@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="mat-elevation-z3">
+  <span [routerLink]="['/']">Project 101</span>
+  <app-user-indicator [user]="authService.user$ | async"></app-user-indicator>
+</mat-toolbar>
+
+<div class="page">
+  <router-outlet></router-outlet>
+</div>
